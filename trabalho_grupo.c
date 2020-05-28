@@ -8,7 +8,7 @@
 
 int main()
 {
-
+int opcao=0;
 
 while (1)
 {
@@ -34,23 +34,23 @@ while (1)
     switch (opcao)
     {
       case 1:
-        printf("\n escolheu poção 1")
+        printf("\n escolheu n 1");
         break;
 
       case 2:
-        printf("\n escolheu poção 1")
+        printf("\n escolheu n 2");
         break;
 
       case 3:
-        printf("\n escolheu poção 1")
+        printf("\n escolheu n 3");
         break;
 
       case 4:
-        printf("\n escolheu poção 1")
+        printf("\n escolheu n 4");
         break;
 
       case 5:
-        printf("\n escolheu poção 1")
+        printf("\n escolheu n 5");
         break;
 
       case 0:
