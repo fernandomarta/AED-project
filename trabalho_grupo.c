@@ -2,9 +2,30 @@
 #include <ctype.h>
 #include <string.h>
 #include <stdlib.h>
+#include <stdbool.h>
+#include "funcoes.h"
 
 
+struct node {
+  int num_aluno;
+  char nome_aluno;
+  //*char apelido_aluno;
+  float nota_frequencia;
+  float nota_trabalho;
+ 
 
+  struct node *seg;
+  struct node *ant;
+};
+
+struct node *head = NULL;
+struct node *last = NULL;
+struct node *current = NULL;
+
+//is list empty
+bool isEmpty() {
+   return head == NULL;
+}
 
 int main()
 {
@@ -34,6 +55,7 @@ while (1)
     switch (opcao)
     {
       case 1:
+        inserir_inicio (1,'m', 15,14);
         printf("\n escolheu n 1");
         break;
 
