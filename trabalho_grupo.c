@@ -6,34 +6,31 @@
 #include "funcoes.h"
 
 
-struct node {
-  int num_aluno;
-  char nome_aluno;
-  //*char apelido_aluno;
-  float nota_frequencia;
-  float nota_trabalho;
- 
-
-  struct node *seg;
-  struct node *ant;
-};
-
-struct node *head = NULL;
-struct node *last = NULL;
-struct node *current = NULL;
 
 //is list empty
 bool isEmpty() {
    return head == NULL;
 }
 
+
+
+
 int main()
 {
+setlocale(LC_ALL,"pl_PL.UTF-8");
+
 int opcao=0;
+char nome_a;
+float nota_f, nota_t ;
+char certeza = 'n';
+int num_eliminar;
+
+
 
 while (1)
 {
 
+    
     system("cls");
     printf(" =============================================================================\n");
     printf("                            Avaliacao de Alunos\n");
@@ -55,8 +52,38 @@ while (1)
     switch (opcao)
     {
       case 1:
-        inserir_inicio (1,'m', 15,14);
-        printf("\n escolheu n 1");
+        printf("Indique o Nome do Aluno: ");
+        scanf("%c",  &nome_a);
+        while (1)
+        {printf("Indique a nota da frequencia: ");
+        scanf("%f",  &nota_f);
+        if( nota_f<0 || nota_f> 20)
+          printf("valor invalido");
+        else 
+          break;
+        }
+        getchar();
+        while(1)
+        {
+        printf("Indique a nota do trabalho: ");
+        scanf("%f",  &nota_t);
+        if( nota_t<0 || nota_t> 20)
+          printf("valor invalido");
+        else 
+          break;
+        }
+        printf("Tem a certeza? (s/n): ");
+        getchar();
+        scanf("%c", &certeza);
+        if (certeza== 's')
+          registar( &head , nome_a, nota_f, nota_t );
+
+        else
+        {
+          printf("\n dados nao gravados");
+          sleep (5);
+          break;
+        }
         break;
 
       case 2:
@@ -64,7 +91,9 @@ while (1)
         break;
 
       case 3:
-        printf("\n escolheu n 3");
+        printf( "Indique o num a eliminar");
+        scanf("%d", &num_eliminar);
+        eliminar (&head , num_eliminar);
         break;
 
       case 4:
@@ -72,7 +101,8 @@ while (1)
         break;
 
       case 5:
-        printf("\n escolheu n 5");
+        listar (&head);
+        espera();
         break;
 
       case 0:
