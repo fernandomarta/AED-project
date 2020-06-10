@@ -17,7 +17,7 @@ bool isEmpty() {
 
 int main()
 {
-setlocale(LC_ALL,"pl_PL.UTF-8");
+//setlocale(LC_ALL,"pl_PL.UTF-8");
 
 int opcao=0;
 char nome_a;
