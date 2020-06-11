@@ -68,7 +68,7 @@ while (1)
         else if (certeza == 'n')
         {
           printf("\n dados nao gravados \n");
-          avancar();
+          espera();
           break;
         }
         break;
@@ -98,7 +98,8 @@ while (1)
       case 4:
         num_selecionado = perguntar();
         pesquisar(&head, num_selecionado);
-        avancar();
+        getchar();
+        espera();
         break;
 
       case 5:
@@ -119,7 +120,7 @@ while (1)
       default:
           printf("\n !!! A opcao escolhida nao e valida !!!\n");
           puts(" Por favor escolha uma opcao indicada");
-          avancar();
+          espera();
     }
 
  }
