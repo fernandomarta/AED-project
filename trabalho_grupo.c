@@ -91,8 +91,20 @@ while (1)
         break;
 
       case 3:
-        num_selecionado = perguntar();
-        eliminar(&head , num_selecionado);
+            num_selecionado = perguntar();
+            pesquisar(&head , num_selecionado);
+            printf("Tem a certeza? (s/n): ");
+            getchar();
+            scanf("%c", &certeza);
+            if (certeza == 's')
+            {
+              eliminar(&head , num_selecionado);
+            }
+            else
+            {
+              system("cls");
+            }
+        
         break;
 
       case 4:
