@@ -7,7 +7,7 @@
 typedef struct node {
   int num_aluno;
   char nome_aluno;
-   //*char apelido_aluno;
+   //*char apelido_aluno; *****
   float nota_frequencia;
   float nota_trabalho;
  
@@ -20,7 +20,7 @@ struct node *current = NULL;
 
 int num_selecionado;
 
-// FUNÇÃO MENU
+// FUNÇÃO MENU ===========================================================================================
 int menu()
 {
    int opcao_f;
@@ -44,15 +44,27 @@ int menu()
     return(opcao_f);
 }
 
-//FUNÇÃO ESPERA
-
+//FUNÇÃO ESPERA  =========================================================================================
 void espera ()
 {
-   printf("Prima a tecla <ENTER> para avancar");
+   printf("Prima a tecla <ENTER> para avancar ");
    getchar();
 }
 
-// FUNÇAO REGISTAR
+// FUNÇÃO PERGUNTAR  ======================================================================================
+int perguntar ()
+{
+   int num_selecionado;
+
+   printf("Indique o numero do aluno: ");
+   scanf("%d", &num_selecionado);
+
+   return(num_selecionado);
+}
+
+
+
+// FUNÇAO REGISTAR (1) ====================================================================================
 
  void registar (node_t **head , char nome_aluno, float nota_frequencia, float nota_trabalho ) 
  {
@@ -80,78 +92,7 @@ void espera ()
 
  }
 
-
-// FUNÇÃO LISTAR
-
-void listar (node_t * head)
-{
-node_t * current = head->next;
-
-printf ( "Num \t NOME \t\t Frequencia \t Trabalho \t Media \n");
-
-while (current != NULL)
-{
-printf("%d \t", current->num_aluno);
-printf("%-20c \t", current->nome_aluno);
-printf("%.1f \t\t", current->nota_frequencia);
-printf("%.1f \t\t", current->nota_trabalho);
-printf("%.1f \n", (current->nota_frequencia + current->nota_trabalho)/2);
-current = current->next;
-}
-}
-
-// FUNÇÃO ELIMINAR
-
-void eliminar (node_t **head , int num_aluno )
-{
-   node_t *current = head;
-
-   // Percorrer a lista até encontrar 
-
-   while (current->next->num_aluno != num_aluno)
-   {
-   /* if(current->next == NULL)
-         printf("registo não encontrado");
-         break; */
-
-      current = current->next;
-   }
-
-   // eliminar o nó
-
-   current->next = current->next->next;
-
-   }
-
-
-// FUNÇÃO PESQUISAR
-
-void pesquisar (node_t * head , int num_aluno )
-{
-   node_t *current = head->next;
-
-   // Percorrer a lista até encontrar 
-
-   while (current->num_aluno != num_aluno)
-   {
-   /* if(current->next == NULL)
-         printf("registo não encontrado");
-         break; */
-
-      current = current->next;
-   }
-
-   printf ( "Num \t NOME \t\t Frequencia \t Trabalho \t Media \n");
-
-   printf("%d \t", current->num_aluno);
-   printf("%-20c \t", current->nome_aluno);
-   printf("%.1f \t\t", current->nota_frequencia);
-   printf("%.1f \t\t", current->nota_trabalho);
-   printf("%.1f \n", (current->nota_frequencia + current->nota_trabalho)/2);
-   current = current->next;
-}
-
-// FUNÇÃO EDITAR
+// FUNÇÃO EDITAR (2) =========================================================================================
 
 void editar (node_t * head , int num_aluno)
 {
@@ -202,18 +143,82 @@ void editar (node_t * head , int num_aluno)
 
 }
 
-// FUNÇÃO PERGUNTAR
-int perguntar ()
+
+
+// FUNÇÃO ELIMINAR (3) =======================================================================================
+
+void eliminar (node_t **head , int num_aluno )
 {
-   int num_selecionado;
+   node_t *current = head;
 
-   printf("Indique o numero do aluno: ");
-   scanf("%d", &num_selecionado);
+   // Percorrer a lista até encontrar 
 
-   return(num_selecionado);
+   while (current->next->num_aluno != num_aluno)
+   {
+   /* if(current->next == NULL)
+         printf("registo não encontrado");
+         break; */
+
+      current = current->next;
+   }
+
+   // eliminar o nó
+
+   current->next = current->next->next;
+
+   }
+
+
+// FUNÇÃO PESQUISAR (4) ======================================================================================
+
+void pesquisar (node_t * head , int num_aluno )
+{
+   node_t *current = head->next;
+
+   // Percorrer a lista até encontrar 
+
+   while (current->num_aluno != num_aluno)
+   {
+   /* if(current->next == NULL)
+         printf("registo não encontrado");
+         break; */
+
+      current = current->next;
+   }
+
+   printf ( "Num \t NOME \t\t Frequencia \t Trabalho \t Media \n");
+
+   printf("%d \t", current->num_aluno);
+   printf("%-20c \t", current->nome_aluno);
+   printf("%.1f \t\t", current->nota_frequencia);
+   printf("%.1f \t\t", current->nota_trabalho);
+   printf("%.1f \n", (current->nota_frequencia + current->nota_trabalho)/2);
+   current = current->next;
 }
 
-// FUNÇÃO INDICAR DADOS
+// FUNÇÃO LISTAR (5) ========================================================================================
+
+void listar (node_t * head)
+{
+node_t * current = head->next;
+
+printf ( "Num \t NOME \t\t Frequencia \t Trabalho \t Media \n");
+
+while (current != NULL)
+{
+printf("%d \t", current->num_aluno);
+printf("%-20c \t", current->nome_aluno);
+printf("%.1f \t\t", current->nota_frequencia);
+printf("%.1f \t\t", current->nota_trabalho);
+printf("%.1f \n", (current->nota_frequencia + current->nota_trabalho)/2);
+current = current->next;
+}
+}
+
+
+
+
+// FUNÇÃO INDICAR DADOS  ===================================================================================
 
 /*int indicar_dados()
 {
