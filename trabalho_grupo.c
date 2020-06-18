@@ -24,7 +24,7 @@ if(!alunos)
   }
 
 int opcao=0;
-char nome_a;
+char nome_a[30];
 float nota_f, nota_t ;
 char certeza = 'n';
 int num_selecionado;
@@ -38,7 +38,7 @@ while (1)
     {
       case 1: //Registar novo Aluno ==============================================================
         printf("Indique o Nome do Aluno: ");
-        scanf("%c",  &nome_a);
+        scanf("%s", nome_a);
         while (1)
         {printf("Indique a nota da frequencia: ");
         scanf("%f",  &nota_f);
@@ -61,7 +61,7 @@ while (1)
         getchar();
         scanf("%c", &certeza);
         if (certeza == 's')
-          registar( &head , nome_a, nota_f, nota_t );
+          registar( head , nome_a, nota_f, nota_t );
 
         else if (certeza == 'n')
         {
@@ -73,13 +73,13 @@ while (1)
 
       case 2:  //Editar Aluno ======================================================================
           num_selecionado = perguntar();
-          pesquisar(&head , num_selecionado);
+          pesquisar(head , num_selecionado);
           printf("Registo a editar. Tem a certeza? (s/n): ");
           getchar();
           scanf("%c", &certeza);
           if (certeza == 's')
           {
-            editar(&head , num_selecionado);
+            editar(head , num_selecionado);
           }
           else
           {
@@ -90,13 +90,13 @@ while (1)
 
       case 3:  //Eliminar registo de Aluno ==============================================================
             num_selecionado = perguntar();
-            pesquisar(&head , num_selecionado);
+            pesquisar(head , num_selecionado);
             printf("Registo a eliminar. Tem a certeza? (s/n): ");
             getchar();
             scanf("%c", &certeza);
             if (certeza == 's')
             {
-              eliminar(&head , num_selecionado);
+              eliminar(head , num_selecionado);
             }
             else
             {
@@ -107,13 +107,13 @@ while (1)
 
       case 4:  //Pesquisar registo de Aluno ==============================================================
         num_selecionado = perguntar();
-        pesquisar(&head, num_selecionado);
+        pesquisar(head, num_selecionado);
         getchar();
         espera();
         break;
 
       case 5:  //Listar todos os registos dos Alunos =====================================================
-        listar (&head);
+        listar (head);
         espera();
         break;
 
