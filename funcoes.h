@@ -6,8 +6,7 @@
 
 typedef struct node {
   int num_aluno;
-  char nome_aluno;
-   //*char apelido_aluno; *****
+  char nome_aluno[30];
   float nota_frequencia;
   float nota_trabalho;
  
@@ -66,17 +65,26 @@ int perguntar ()
 
 // FUNÇAO REGISTAR (1) ====================================================================================
 
- void registar (node_t **head , char nome_aluno, float nota_frequencia, float nota_trabalho ) 
+ void registar (node_t *head , char nome_aluno, float nota_frequencia, float nota_trabalho ) 
  {
 
    //int num_aluno = 0;
    //float media_aluno = 0;
+   //registar o primeiro no
+   if (current == NULL) {
+
+      current = (node_t *) malloc(sizeof (node_t));
+      current->next = NULL;
+      head = current;
+   }
+
 
    /* Posicionar no nó inicial */
-      node_t *current = head;
+      current = head;
 
       
    /* Percorrer a lista até ao final */
+   printf("antes de adicionar");
    while (current->next != NULL)
    {
    current = current->next;
@@ -85,7 +93,7 @@ int perguntar ()
    /* Criar novo nó e adicionar no final */
    current->next = (node_t *) malloc(sizeof (node_t));
    current->next->num_aluno = current->num_aluno + 1;
-   current->next->nome_aluno = nome_aluno;
+   strcpy(current->next->nome_aluno , &nome_aluno);
    current->next->nota_frequencia = nota_frequencia;
    current->next->nota_trabalho = nota_trabalho;
    current->next->next = NULL;
@@ -137,7 +145,7 @@ void editar (node_t * head , int num_aluno)
    }
 
    current->num_aluno = num_aluno;
-   current->nome_aluno = nome_aluno;
+   strcpy(current->nome_aluno , &nome_aluno);
    current->nota_frequencia = nota_frequencia;
    current->nota_trabalho = nota_trabalho;
 
@@ -147,7 +155,7 @@ void editar (node_t * head , int num_aluno)
 
 // FUNÇÃO ELIMINAR (3) =======================================================================================
 
-void eliminar (node_t **head , int num_aluno )
+void eliminar (node_t *head , int num_aluno )
 {
    node_t *current = head;
 
@@ -171,7 +179,7 @@ void eliminar (node_t **head , int num_aluno )
 
 // FUNÇÃO PESQUISAR (4) ======================================================================================
 
-void pesquisar (node_t * head , int num_aluno )
+void pesquisar (node_t *head , int num_aluno )
 {
    node_t *current = head->next;
 
