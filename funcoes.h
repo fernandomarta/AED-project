@@ -4,6 +4,10 @@
 #include <stdlib.h>
 #include <stdbool.h>
 
+
+
+
+
 typedef struct node {
   int num_aluno;
   char nome_aluno[30];
@@ -11,13 +15,22 @@ typedef struct node {
   float nota_trabalho;
  
   struct node *next;
+  struct node *current;
+  struct node *head;
 }node_t;
 
-struct node *head = NULL;
-struct node *last = NULL;
-struct node *current = NULL;
+struct node *head = 0;
+//struct node *last = NULL;
+struct node *current = 0;
 
 int num_selecionado;
+
+
+/*bool isEmpty () {
+    return head == NULL;
+    printf("lista vazia");
+    getchar();
+}*/
 
 // FUNÇÃO MENU ===========================================================================================
 int menu()
@@ -43,12 +56,14 @@ int menu()
     return(opcao_f);
 }
 
+
 //FUNÇÃO ESPERA  =========================================================================================
 void espera ()
 {
    printf("Prima a tecla <ENTER> para avancar ");
    getchar();
 }
+
 
 // FUNÇÃO PERGUNTAR  ======================================================================================
 int perguntar ()
@@ -65,50 +80,146 @@ int perguntar ()
 
 // FUNÇAO REGISTAR (1) ====================================================================================
 
- void registar (node_t *head , char nome_aluno, float nota_frequencia, float nota_trabalho ) 
- {
+ //void registar (node_t *head , int num_aluno, char nome_aluno[], float nota_frequencia, float nota_trabalho ) 
+
+void registar (int num_aluno, char nome_aluno[], float nota_frequencia, float nota_trabalho ) 
+{
 
    //int num_aluno = 0;
    //float media_aluno = 0;
    //registar o primeiro no
-   if (current == NULL) {
-
-      current = (node_t *) malloc(sizeof (node_t));
-      current->next = NULL;
-      head = current;
-   }
-
-
+      
    /* Posicionar no nó inicial */
-      current = head;
+
+   //Registo em caso de não existir nós =================================================
+      //isEmpty();
+
+      //node_t *current = head;
+      printf ("antes de verificar o head");
+      espera();
+   
+   if (head == NULL)
+   {
+          printf("head NULL"); getchar();
+        // struct node * current = head ;
+         
+         current = (node_t *) malloc(sizeof (node_t));
+          
+         current->num_aluno = num_aluno;
+         strcpy(current->nome_aluno, nome_aluno);
+         //current->nome_aluno = nome_aluno;
+         current->nota_frequencia = nota_frequencia;
+         current->nota_trabalho = nota_trabalho;
+
+         current->next = NULL;
+         head = current;    
+   }
+   else 
+   {
 
       
-   /* Percorrer a lista até ao final */
-   printf("antes de adicionar");
-   while (current->next != NULL)
-   {
-   current = current->next;
-   }
+   //Registo em caso de um só nó  ========================================================
+      
+      if (head->next == NULL)
+      {
+         printf("1 nó existente "); getchar();
+         current = head;
+            
+            if ( current->num_aluno > num_aluno) //gravar o novo em primeiro
+            {
+               node_t * new_node;
+               new_node = (node_t *) malloc(sizeof(node_t));
 
-   /* Criar novo nó e adicionar no final */
-   current->next = (node_t *) malloc(sizeof (node_t));
-   current->next->num_aluno = current->num_aluno + 1;
-   strcpy(current->next->nome_aluno , &nome_aluno);
-   current->next->nota_frequencia = nota_frequencia;
-   current->next->nota_trabalho = nota_trabalho;
-   current->next->next = NULL;
+               new_node->num_aluno = num_aluno;
+               // strlen (const char*)
+               strcpy(new_node->nome_aluno , nome_aluno);
+               //current->nome_aluno = nome_aluno;
+               new_node->nota_frequencia = nota_frequencia;
+               new_node->nota_trabalho = nota_trabalho;
 
- }
+               new_node->next = head;
+               head = new_node;
+            }  
+               else if (current->num_aluno < num_aluno) // gravar o novo depois
+                     {  
+                     current->next = (node_t *) malloc (sizeof (node_t));
+                     
+                     current->next->num_aluno = num_aluno;
+                     strcpy(current->next->nome_aluno , nome_aluno);
+                     //current->nome_aluno = nome_aluno;
+                     current->next->nota_frequencia = nota_frequencia;
+                     current->next->nota_trabalho = nota_trabalho;
+
+                     current->next->next = NULL;
+                     }
+                     else
+                        {
+                           printf("Numero já existente");
+                           getchar();
+                        }    
+
+
+      }  
+      else  
+      {                 
+
+   //Registo em caso de multiplos nós ====================================================
+         printf("antes de encontrar posicao correta");
+
+         int registo_ultimo = 0;
+         current = head;
+      // Criar novo nó 
+         node_t * new_node;
+         new_node = (node_t *) malloc(sizeof(node_t));
+
+      // Encontrar a posição correta de inserção
+         while (current->num_aluno < num_aluno)
+         {
+            if (current->next == NULL)  // adicionar no fim
+             {  new_node->num_aluno = num_aluno;
+               // strlen (const char*)
+               strcpy(new_node->nome_aluno , nome_aluno);
+               //current->nome_aluno = nome_aluno;
+               new_node->nota_frequencia = nota_frequencia;
+               new_node->nota_trabalho = nota_trabalho;
+
+               new_node->next = NULL;
+               current->next = new_node;
+               registo_ultimo = 1;
+               break;
+             }
+
+            current = current->next;
+         }
+
+         if (registo_ultimo = 0)
+         {
+            new_node->num_aluno = num_aluno;
+            // strlen (const char*)
+            strcpy(new_node->nome_aluno , nome_aluno);
+            //current->nome_aluno = nome_aluno;
+            new_node->nota_frequencia = nota_frequencia;
+            new_node->nota_trabalho = nota_trabalho;
+
+            new_node->next = current->next;
+            current->next = new_node;
+         }
+      }
+   }   
+}
 
 // FUNÇÃO EDITAR (2) =========================================================================================
 
-void editar (node_t * head , int num_aluno)
+//void editar (node_t * head , int num_aluno)
+void editar (int num_aluno)
 {
-   char nome_aluno;
-   float nota_frequencia;
-   float nota_trabalho;
+   int num_a;
+   char nome_a;
+   float nota_f;
+   float nota_t;
 
-   node_t *current = head->next;
+   //node_t *current = head->next;
+   current = head;
 
    // Percorrer a lista até encontrar 
 
@@ -122,32 +233,38 @@ void editar (node_t * head , int num_aluno)
    }
 
    getchar();
+   printf("Indique o Numero do Aluno: ");
+   scanf("%d",  num_a);
+
    printf("Indique o Nome do Aluno: ");
-   scanf("%c",  &nome_aluno);
+   scanf("%s",  nome_a);
+
    while (1)
    {
    printf("Indique a nota da frequencia: ");
-   scanf("%f",  &nota_frequencia);
-   if( nota_frequencia<0 || nota_frequencia> 20)
+   scanf("%f",  &nota_f);
+   if( nota_f < 0 || nota_f > 20)
       printf("valor invalido");
    else 
       break;
    }
    getchar();
+
    while(1)
    {
    printf("Indique a nota do trabalho: ");
-   scanf("%f",  &nota_trabalho);
-   if( nota_trabalho<0 || nota_trabalho> 20)
+   scanf("%f",  &nota_f);
+   if( nota_t<0 || nota_t> 20)
       printf("valor invalido");
    else 
       break;
    }
 
-   current->num_aluno = num_aluno;
-   strcpy(current->nome_aluno , &nome_aluno);
-   current->nota_frequencia = nota_frequencia;
-   current->nota_trabalho = nota_trabalho;
+   current->num_aluno = num_a;
+   strcpy(current->nome_aluno , nome_a);
+   //current->nome_aluno = nome_a;
+   current->nota_frequencia = nota_f;
+   current->nota_trabalho = nota_t;
 
 }
 
@@ -208,7 +325,7 @@ void pesquisar (node_t *head , int num_aluno )
 
 void listar (node_t * head)
 {
-node_t * current = head->next;
+node_t * current = head;
 
 printf ( "Num \t NOME \t\t Frequencia \t Trabalho \t Media \n");
 
