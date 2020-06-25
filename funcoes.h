@@ -298,7 +298,7 @@ void eliminar (node_t *head , int num_aluno )
 
 void pesquisar (node_t *head , int num_aluno )
 {
-   node_t *current = head->next;
+   node_t *current = head;
 
    // Percorrer a lista até encontrar 
 
@@ -314,7 +314,7 @@ void pesquisar (node_t *head , int num_aluno )
    printf ( "Num \t NOME \t\t Frequencia \t Trabalho \t Media \n");
 
    printf("%d \t", current->num_aluno);
-   printf("%-20c \t", current->nome_aluno);
+   printf("%s \t", current->nome_aluno);
    printf("%.1f \t\t", current->nota_frequencia);
    printf("%.1f \t\t", current->nota_trabalho);
    printf("%.1f \n", (current->nota_frequencia + current->nota_trabalho)/2);
@@ -332,7 +332,7 @@ printf ( "Num \t NOME \t\t Frequencia \t Trabalho \t Media \n");
 while (current != NULL)
 {
 printf("%d \t", current->num_aluno);
-printf("%-20c \t", current->nome_aluno);
+printf("%s \t", current->nome_aluno);
 printf("%.1f \t\t", current->nota_frequencia);
 printf("%.1f \t\t", current->nota_trabalho);
 printf("%.1f \n", (current->nota_frequencia + current->nota_trabalho)/2);

@@ -7,6 +7,7 @@
 
 
 
+
 int main()
 {
 //setlocale(LC_ALL,"pl_PL.UTF-8");
@@ -126,6 +127,7 @@ while (1)
           listar (head);
           espera();
           break;
+
 
       case 0:  //Terminar o programa ==========================================
           printf("\n\n     Seleciou a Opcao:\n >>> Terminar Programa <<<\n\n");
