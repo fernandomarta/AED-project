@@ -214,7 +214,7 @@ void registar (int num_aluno, char nome_aluno[], float nota_frequencia, float no
 void editar (int num_aluno)
 {
    int num_a;
-   char nome_a;
+   char nome_a[30];
    float nota_f;
    float nota_t;
 
@@ -234,10 +234,10 @@ void editar (int num_aluno)
 
    getchar();
    printf("Indique o Numero do Aluno: ");
-   scanf("%d",  num_a);
+   scanf("%d", &num_a);
 
    printf("Indique o Nome do Aluno: ");
-   scanf("%s",  nome_a);
+   scanf("%s", nome_a);
 
    while (1)
    {
@@ -253,7 +253,7 @@ void editar (int num_aluno)
    while(1)
    {
    printf("Indique a nota do trabalho: ");
-   scanf("%f",  &nota_f);
+   scanf("%f",  &nota_t);
    if( nota_t<0 || nota_t> 20)
       printf("valor invalido");
    else 
@@ -272,27 +272,22 @@ void editar (int num_aluno)
 
 // FUNÇÃO ELIMINAR (3) =======================================================================================
 
-void eliminar (node_t *head , int num_aluno )
+node_t* eliminar (node_t *current , int num_aluno )
 {
-   node_t *current = head;
+   node_t* next;
 
-   // Percorrer a lista até encontrar 
-
-   while (current->next->num_aluno != num_aluno)
-   {
-   /* if(current->next == NULL)
-         printf("registo não encontrado");
-         break; */
-
-      current = current->next;
+   if (current == NULL) { // Encontra a cauda
+        printf("Nao encontrado\n");
+        return NULL;
+    } else if (current->num_aluno == num_aluno) { // Encontrou o valor a remover
+        next = current->next;
+        free(current);
+        return next;
+    } else { // Continuar
+        current->next = eliminar(current->next, num_aluno);
+        return current;
+    }
    }
-
-   // eliminar o nó
-
-   current->next = current->next->next;
-
-   }
-
 
 // FUNÇÃO PESQUISAR (4) ======================================================================================
 

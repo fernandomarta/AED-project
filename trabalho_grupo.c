@@ -107,7 +107,7 @@ while (1)
             scanf("%c", &certeza);
             if (certeza == 's')
             {
-              eliminar(head , num_selecionado);
+             head = eliminar(head , num_selecionado);
             }
             else
             {
