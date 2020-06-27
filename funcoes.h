@@ -238,7 +238,8 @@ void editar (int num_aluno)
    scanf("%d", &num_a);
 
    printf("Indique o Nome do Aluno: ");
-   scanf("%s", nome_a);
+   fgets (nome_a, 30, stdin);
+   nome_a[strlen(nome_a) - 1] = '\0';
 
    while (1)
    {
