@@ -17,6 +17,7 @@ typedef struct node {
   struct node *next;
   struct node *current;
   struct node *head;
+  struct node *node;
 }node_t;
 
 struct node *head = 0;
@@ -334,6 +335,44 @@ printf("%.1f \n", (current->nota_frequencia + current->nota_trabalho)/2);
 current = current->next;
 }
 }
+
+/* Bubble sort the given linked list */
+void bubbleSort(struct node *head) 
+{ 
+    int swapped, i; 
+    struct node *ptr1; 
+    struct node *lptr = NULL; 
+  
+    /* Checking for empty list */
+    if (head == NULL) 
+        return; 
+  
+    do
+    { 
+        swapped = 0; 
+        ptr1 = head; 
+  
+        while (ptr1->next != lptr) 
+        { 
+            if (ptr1->num_aluno > ptr1->next->num_aluno) 
+            {  
+                swap(ptr1, ptr1->next); 
+                swapped = 1; 
+            } 
+            ptr1 = ptr1->next; 
+        } 
+        lptr = ptr1; 
+    } 
+    while (swapped); 
+} 
+
+/* function to swap data of two nodes a and b*/
+void swap(struct node *a, struct node *b) 
+{ 
+    int temp = a->num_aluno; 
+    a->num_aluno = b->num_aluno; 
+    b->num_aluno = temp; 
+} 
 
 
 // Função importar dados do ficheiro de disco =============================================================

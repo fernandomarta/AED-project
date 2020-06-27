@@ -41,7 +41,9 @@ while (1)
         scanf("%d", &num_a);
         getchar();
         printf("Indique o Nome do Aluno: ");
-        scanf("%s", nome_a);
+        fgets (nome_a, 30, stdin);
+        nome_a[strlen(nome_a) - 1] = '\0';
+        //scanf("%s", nome_a);
         while (1)
         { 
           printf("Indique a nota da frequencia: ");
@@ -119,6 +121,7 @@ while (1)
           break;
 
       case 5:  //Listar todos os registos dos Alunos ==========================
+          bubbleSort(head);
           listar (head);
           espera();
           break;
