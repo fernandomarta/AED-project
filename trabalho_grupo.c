@@ -17,7 +17,7 @@ int main()
 
 FILE * ficheiro_alunos_input;
 
-ficheiro_alunos_input = fopen("BDalunosAED.db","r");
+ficheiro_alunos_input = fopen("BDalunosAED.db","a");
 if(!ficheiro_alunos_input)
   {  puts("erro ao abrir ficheiro");
     exit(1);
