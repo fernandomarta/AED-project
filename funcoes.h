@@ -60,7 +60,7 @@ int menu()
 //FUNÇÃO ESPERA  =========================================================================================
 void espera ()
 {
-   printf("Prima a tecla <ENTER> para avancar ");
+   printf("\nPrima a tecla <ENTER> para avancar ");
    getchar();
 }
 
