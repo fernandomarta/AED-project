@@ -336,6 +336,56 @@ current = current->next;
 }
 
 
+// Função importar dados do ficheiro de disco =============================================================
+
+void importar()
+{
+   FILE * ficheiro_alunos_input;
+
+   ficheiro_alunos_input = fopen("BDalunosAED.db","a");  // !! deveria ser o "r"  !! <<<<<<<=====
+   if(!ficheiro_alunos_input)
+   {  
+      puts("erro ao abrir ficheiro");
+      exit(1);
+   } 
+
+   while(fread(&current, sizeof(node_t),1,ficheiro_alunos_input)) 
+   {
+      current=current->next;
+   }
+
+   fclose(ficheiro_alunos_input);
+}
+
+
+// Função exportar dados para o ficheiro de disco =========================================================
+
+void exportar()
+{
+   FILE *ficheiro_alunos_output;
+
+   // abrir o ficheiro para escrita 
+   ficheiro_alunos_output = fopen ("BDalunosAED.db", "w"); 
+   if (ficheiro_alunos_output == NULL) 
+   { 
+      puts("erro ao abrir ficheiro");
+      exit (1); 
+   } 
+
+   // gravar a estrutura
+   current = head;
+   while (current->next != NULL)
+   {
+      fwrite (&current, sizeof(node_t), 1, ficheiro_alunos_output); 
+      current = current->next;
+   }
+
+   fclose(ficheiro_alunos_output);
+
+}
+
+
+
 
 
 // FUNÇÃO INDICAR DADOS  ===================================================================================

@@ -13,22 +13,10 @@ int main()
 //setlocale(LC_ALL,"pl_PL.UTF-8");
 
 
-// Abrir ficheiro em disco e carregar em memória =========================================================
+// Abrir ficheiro em disco e carregar dados em memória ===================================================
 
-FILE * ficheiro_alunos_input;
+  importar();
 
-ficheiro_alunos_input = fopen("BDalunosAED.db","a");
-if(!ficheiro_alunos_input)
-  {  puts("erro ao abrir ficheiro");
-    exit(1);
-  }
-
-while(fread(&current, sizeof(node_t),1,ficheiro_alunos_input)) {
-  
-  current=current->next;
-}
-
-fclose(ficheiro_alunos_input);
 
 // Declaração de variáveis =============================================================================
 
@@ -142,6 +130,7 @@ while (1)
           if(getchar()=='s')
               { printf("\n Adeus! Ate a vista!\n");
                 
+                exportar();
                 exit(0);
               }
           break;
@@ -154,28 +143,6 @@ while (1)
 
  }
 
-// Guardar dados da memória em disco =============================================================
-
-
-FILE *ficheiro_alunos_output;
-
-    // abrir o ficheiro para escrita 
-    ficheiro_alunos_output = fopen ("BDalunosAED.db", "w"); 
-    if (ficheiro_alunos_output == NULL) 
-    { 
-        puts("erro ao abrir ficheiro");
-        exit (1); 
-    } 
-
-    // gravar a estrutura
-    node_t *current = head;
-    while (current->next != NULL)
-    {
-       fwrite (&current, sizeof(node_t), 1, ficheiro_alunos_output); 
-       current = current->next;
-    }
-
-    fclose(ficheiro_alunos_output);
 
 return(0);
 }
