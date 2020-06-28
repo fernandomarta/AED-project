@@ -414,7 +414,7 @@ void importar()
 {
    FILE * ficheiro_alunos_input;
 
-   ficheiro_alunos_input = fopen("BDalunosAED.txt","a+");  // !! deveria ser o "r"  !! <<<<<<<=====
+   ficheiro_alunos_input = fopen("BDalunosAED.dat","rb");  // !! deveria ser o "r"  !! <<<<<<<=====
    if(!ficheiro_alunos_input)
    {  
       puts("erro ao abrir ficheiro");
@@ -438,7 +438,7 @@ void exportar()
    FILE *ficheiro_alunos_output;
 
    // abrir o ficheiro para escrita 
-   ficheiro_alunos_output = fopen ("BDalunosAED.dat", "w"); 
+   ficheiro_alunos_output = fopen ("BDalunosAED.dat", "wb"); 
    if (ficheiro_alunos_output == NULL) 
    { 
       puts("erro ao abrir ficheiro");
