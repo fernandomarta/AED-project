@@ -18,7 +18,7 @@ typedef struct node {
   struct node *next;
   struct node *current;
   struct node *head;
-  struct node *node;
+  //struct node *node;
 }node_t;
 
 struct node *head = 0;
@@ -414,22 +414,39 @@ void importar()
 {
    FILE * ficheiro_alunos_input;
 
-
    ficheiro_alunos_input = fopen("BDalunosAED.dat","rb");  // !! deveria ser o "r"  !! <<<<<<<=====
+   
    if(!ficheiro_alunos_input)
    {  
       puts("erro ao abrir ficheiro");
       exit(1);
    } 
+   rewind(ficheiro_alunos_input);
 
-   while(fread(&current, sizeof(node_t),1,ficheiro_alunos_input)) 
+   while(!feof(ficheiro_alunos_input)) 
    {
       current = (node_t *) malloc(sizeof (node_t));
-      current=current->next;
+      fread(&current, sizeof(node_t),1,ficheiro_alunos_input);
+      
+      if (head == NULL)
+      {
+         head = current;
+         current->next = NULL;
+      }
+      else
+      {
+          
+         current->next = current;
+         current->next->next = NULL;
+      }
+      
+      current=current->next;  // ???
+      
    }
 
    fclose(ficheiro_alunos_input);
 }
+
 
 
 // Função exportar dados para o ficheiro de disco =========================================================
