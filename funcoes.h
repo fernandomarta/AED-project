@@ -414,14 +414,14 @@ void importar()
 {
    FILE * ficheiro_alunos_input;
 
-   ficheiro_alunos_input = fopen("BDalunosAED.txt","a+");  // !! deveria ser o "r"  !! <<<<<<<=====
+   ficheiro_alunos_input = fopen("BDalunosAED.db","a");  // !! deveria ser o "r"  !! <<<<<<<=====
    if(!ficheiro_alunos_input)
    {  
       puts("erro ao abrir ficheiro");
       exit(1);
    } 
 
-   while(fgets(&current, sizeof(node_t),ficheiro_alunos_input)) 
+   while(fread(&current, sizeof(node_t),1,ficheiro_alunos_input)) 
    {
       current = (node_t *) malloc(sizeof (node_t));
       current=current->next;
@@ -438,7 +438,7 @@ void exportar()
    FILE *ficheiro_alunos_output;
 
    // abrir o ficheiro para escrita 
-   ficheiro_alunos_output = fopen ("BDalunosAED.dat", "w"); 
+   ficheiro_alunos_output = fopen ("BDalunosAED.db", "w"); 
    if (ficheiro_alunos_output == NULL) 
    { 
       puts("erro ao abrir ficheiro");
