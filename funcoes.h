@@ -414,7 +414,7 @@ void importar()
 {
    FILE * ficheiro_alunos_input;
 
-   ficheiro_alunos_input = fopen("BDalunosAED.dat","a+");  // !! deveria ser o "r"  !! <<<<<<<=====
+   ficheiro_alunos_input = fopen("BDalunosAED.txt","a+");  // !! deveria ser o "r"  !! <<<<<<<=====
    if(!ficheiro_alunos_input)
    {  
       puts("erro ao abrir ficheiro");
