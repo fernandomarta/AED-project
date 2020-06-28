@@ -3,6 +3,7 @@
 #include <string.h>
 #include <stdlib.h>
 #include <stdbool.h>
+#include <stddef.h>
 
 
 
@@ -117,8 +118,20 @@ void registar (int num_aluno, char nome_aluno[], float nota_frequencia, float no
    }
    else 
    {
+       node_t * new_node;
+       new_node = (node_t *) malloc(sizeof(node_t));
 
-      
+         new_node->num_aluno = num_aluno;
+         strcpy(new_node->nome_aluno, nome_aluno);
+         //current->nome_aluno = nome_aluno;
+         new_node->nota_frequencia = nota_frequencia;
+         new_node->nota_trabalho = nota_trabalho;
+        /* Apontar o next do novo nó para o início da lista */ 
+       
+         new_node->next = head; /* Apontar o início da lista para o novo nó */ 
+         head = new_node; 
+   }
+  /*    
    //Registo em caso de um só nó  ========================================================
       
       if (head->next == NULL)
@@ -206,8 +219,10 @@ void registar (int num_aluno, char nome_aluno[], float nota_frequencia, float no
             current->next = new_node;
          }
       }
-   }   
-}
+      */
+   }
+      
+
 
 // FUNÇÃO EDITAR (2) =========================================================================================
 
@@ -237,6 +252,7 @@ void editar (int num_aluno)
    printf("Indique o Numero do Aluno: ");
    scanf("%d", &num_a);
 
+   getchar();
    printf("Indique o Nome do Aluno: ");
    fgets (nome_a, 30, stdin);
    nome_a[strlen(nome_a) - 1] = '\0';
@@ -324,14 +340,14 @@ void listar (node_t * head)
 {
 node_t * current = head;
 
-printf ( "Num \t NOME \t\t Frequencia \t Trabalho \t Media \n");
+printf ( "Num \tNOME \t\t\t\t  Frequencia \t Trabalho \tMedia \n");
 
 while (current != NULL)
 {
 printf("%d \t", current->num_aluno);
-printf("%s \t", current->nome_aluno);
-printf("%.1f \t\t", current->nota_frequencia);
-printf("%.1f \t\t", current->nota_trabalho);
+printf("%-33s ", current->nome_aluno);
+printf("%-14.1f ", current->nota_frequencia);
+printf("%-14.1f ", current->nota_trabalho);
 printf("%.1f \n", (current->nota_frequencia + current->nota_trabalho)/2);
 current = current->next;
 }
@@ -370,10 +386,26 @@ void bubbleSort(struct node *head)
 /* function to swap data of two nodes a and b*/
 void swap(struct node *a, struct node *b) 
 { 
-    int temp = a->num_aluno; 
+    int temp_num = a->num_aluno; 
     a->num_aluno = b->num_aluno; 
-    b->num_aluno = temp; 
-} 
+    b->num_aluno = temp_num; 
+
+   char temp_nome[30];
+    strcpy(temp_nome, a->nome_aluno);
+    strcpy(a->nome_aluno, b->nome_aluno);
+    strcpy(b->nome_aluno, temp_nome);
+
+    float temp_f = a->nota_frequencia; 
+    a->nota_frequencia = b->nota_frequencia; 
+    b->nota_frequencia = temp_f;
+
+    float temp_t = a->nota_trabalho; 
+    a->nota_trabalho = b->nota_trabalho; 
+    b->nota_trabalho = temp_t;
+
+    
+
+}  
 
 
 // Função importar dados do ficheiro de disco =============================================================
@@ -382,15 +414,16 @@ void importar()
 {
    FILE * ficheiro_alunos_input;
 
-   ficheiro_alunos_input = fopen("BDalunosAED.db","a");  // !! deveria ser o "r"  !! <<<<<<<=====
+   ficheiro_alunos_input = fopen("BDalunosAED.dat","a+");  // !! deveria ser o "r"  !! <<<<<<<=====
    if(!ficheiro_alunos_input)
    {  
       puts("erro ao abrir ficheiro");
       exit(1);
    } 
 
-   while(fread(&current, sizeof(node_t),1,ficheiro_alunos_input)) 
+   while(fgets(&current, sizeof(node_t),ficheiro_alunos_input)) 
    {
+      current = (node_t *) malloc(sizeof (node_t));
       current=current->next;
    }
 
@@ -405,7 +438,7 @@ void exportar()
    FILE *ficheiro_alunos_output;
 
    // abrir o ficheiro para escrita 
-   ficheiro_alunos_output = fopen ("BDalunosAED.db", "w"); 
+   ficheiro_alunos_output = fopen ("BDalunosAED.dat", "w"); 
    if (ficheiro_alunos_output == NULL) 
    { 
       puts("erro ao abrir ficheiro");
