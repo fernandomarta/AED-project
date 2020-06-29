@@ -7,8 +7,6 @@
 
 
 
-
-
 typedef struct node {
   int num_aluno;
   char nome_aluno[30];
@@ -18,12 +16,10 @@ typedef struct node {
   struct node *next;
   struct node *current;
   struct node *head;
-  //struct node *node;
 }node_t;
 
-struct node *head = 0;
-//struct node *last = NULL;
-struct node *current = 0;
+struct node *head = NULL;
+struct node *current = NULL;
 
 int num_selecionado;
 
@@ -86,141 +82,32 @@ int perguntar ()
 
 void registar (int num_aluno, char nome_aluno[], float nota_frequencia, float nota_trabalho ) 
 {
-
-   //int num_aluno = 0;
-   //float media_aluno = 0;
-   //registar o primeiro no
-      
-   /* Posicionar no nó inicial */
-
-   //Registo em caso de não existir nós =================================================
-      //isEmpty();
-
-      //node_t *current = head;
-      printf ("antes de verificar o head");
-      espera();
-   
-   if (head == NULL)
+   if (head == NULL)   /* Registo em caso de não existir nós */
    {
-          printf("head NULL"); getchar();
-        // struct node * current = head ;
+      current = (node_t *) malloc(sizeof (node_t));
          
-         current = (node_t *) malloc(sizeof (node_t));
-          
-         current->num_aluno = num_aluno;
-         strcpy(current->nome_aluno, nome_aluno);
-         //current->nome_aluno = nome_aluno;
-         current->nota_frequencia = nota_frequencia;
-         current->nota_trabalho = nota_trabalho;
+      current->num_aluno = num_aluno;
+      strcpy(current->nome_aluno, nome_aluno);
+      current->nota_frequencia = nota_frequencia;
+      current->nota_trabalho = nota_trabalho;
 
-         current->next = NULL;
-         head = current;    
+      current->next = NULL;
+      head = current;    
    }
-   else 
+   else              /*acrescentar novo registo */
    {
-       node_t * new_node;
-       new_node = (node_t *) malloc(sizeof(node_t));
+      node_t * new_node;
+      new_node = (node_t *) malloc(sizeof(node_t));
 
-         new_node->num_aluno = num_aluno;
-         strcpy(new_node->nome_aluno, nome_aluno);
-         //current->nome_aluno = nome_aluno;
-         new_node->nota_frequencia = nota_frequencia;
-         new_node->nota_trabalho = nota_trabalho;
-        /* Apontar o next do novo nó para o início da lista */ 
-       
-         new_node->next = head; /* Apontar o início da lista para o novo nó */ 
-         head = new_node; 
-   }
-  /*    
-   //Registo em caso de um só nó  ========================================================
-      
-      if (head->next == NULL)
-      {
-         printf("1 nó existente "); getchar();
-         current = head;
+      new_node->num_aluno = num_aluno;
+      strcpy(new_node->nome_aluno, nome_aluno);
+      new_node->nota_frequencia = nota_frequencia;
+      new_node->nota_trabalho = nota_trabalho;
             
-            if ( current->num_aluno > num_aluno) //gravar o novo em primeiro
-            {
-               node_t * new_node;
-               new_node = (node_t *) malloc(sizeof(node_t));
-
-               new_node->num_aluno = num_aluno;
-               // strlen (const char*)
-               strcpy(new_node->nome_aluno , nome_aluno);
-               //current->nome_aluno = nome_aluno;
-               new_node->nota_frequencia = nota_frequencia;
-               new_node->nota_trabalho = nota_trabalho;
-
-               new_node->next = head;
-               head = new_node;
-            }  
-               else if (current->num_aluno < num_aluno) // gravar o novo depois
-                     {  
-                     current->next = (node_t *) malloc (sizeof (node_t));
-                     
-                     current->next->num_aluno = num_aluno;
-                     strcpy(current->next->nome_aluno , nome_aluno);
-                     //current->nome_aluno = nome_aluno;
-                     current->next->nota_frequencia = nota_frequencia;
-                     current->next->nota_trabalho = nota_trabalho;
-
-                     current->next->next = NULL;
-                     }
-                     else
-                        {
-                           printf("Numero já existente");
-                           getchar();
-                        }    
-
-
-      }  
-      else  
-      {                 
-
-   //Registo em caso de multiplos nós ====================================================
-         printf("antes de encontrar posicao correta");
-
-         int registo_ultimo = 0;
-         current = head;
-      // Criar novo nó 
-         node_t * new_node;
-         new_node = (node_t *) malloc(sizeof(node_t));
-
-      // Encontrar a posição correta de inserção
-         while (current->num_aluno < num_aluno)
-         {
-            if (current->next == NULL)  // adicionar no fim
-             {  new_node->num_aluno = num_aluno;
-               // strlen (const char*)
-               strcpy(new_node->nome_aluno , nome_aluno);
-               //current->nome_aluno = nome_aluno;
-               new_node->nota_frequencia = nota_frequencia;
-               new_node->nota_trabalho = nota_trabalho;
-
-               new_node->next = NULL;
-               current->next = new_node;
-               registo_ultimo = 1;
-               break;
-             }
-
-            current = current->next;
-         }
-
-         if (registo_ultimo = 0)
-         {
-            new_node->num_aluno = num_aluno;
-            // strlen (const char*)
-            strcpy(new_node->nome_aluno , nome_aluno);
-            //current->nome_aluno = nome_aluno;
-            new_node->nota_frequencia = nota_frequencia;
-            new_node->nota_trabalho = nota_trabalho;
-
-            new_node->next = current->next;
-            current->next = new_node;
-         }
-      }
-      */
+      new_node->next = head;  /* Apontar o next do novo nó para o início da lista */ 
+      head = new_node; /* Apontar o início da lista para o novo nó */ 
    }
+}
       
 
 
@@ -234,10 +121,9 @@ void editar (int num_aluno)
    float nota_f;
    float nota_t;
 
-   //node_t *current = head->next;
    current = head;
 
-   // Percorrer a lista até encontrar 
+// Percorrer a lista até encontrar 
 
    while (current->num_aluno != num_aluno)
    {
@@ -280,7 +166,6 @@ void editar (int num_aluno)
 
    current->num_aluno = num_a;
    strcpy(current->nome_aluno , nome_a);
-   //current->nome_aluno = nome_a;
    current->nota_frequencia = nota_f;
    current->nota_trabalho = nota_t;
 
@@ -353,12 +238,12 @@ current = current->next;
 }
 }
 
-/* Bubble sort the given linked list */
+// Função ordenar - BubbleSort  =================================================================== 
 void bubbleSort(struct node *head) 
 { 
-    int swapped, i; 
-    struct node *ptr1; 
-    struct node *lptr = NULL; 
+    int trocarped, i; 
+    struct node *inicio; 
+    struct node *final = NULL; 
   
     /* Checking for empty list */
     if (head == NULL) 
@@ -366,25 +251,25 @@ void bubbleSort(struct node *head)
   
     do
     { 
-        swapped = 0; 
-        ptr1 = head; 
+        trocarped = 0; 
+        inicio = head; 
   
-        while (ptr1->next != lptr) 
+        while (inicio->next != final) 
         { 
-            if (ptr1->num_aluno > ptr1->next->num_aluno) 
+            if (inicio->num_aluno > inicio->next->num_aluno) 
             {  
-                swap(ptr1, ptr1->next); 
-                swapped = 1; 
+                trocar(inicio, inicio->next); 
+                trocarped = 1; 
             } 
-            ptr1 = ptr1->next; 
+            inicio = inicio->next; 
         } 
-        lptr = ptr1; 
+        final = inicio; 
     } 
-    while (swapped); 
+    while (trocarped); 
 } 
 
-/* function to swap data of two nodes a and b*/
-void swap(struct node *a, struct node *b) 
+// Função trocar registos  ===============================================================================
+void trocar(struct node *a, struct node *b) 
 { 
     int temp_num = a->num_aluno; 
     a->num_aluno = b->num_aluno; 
@@ -402,9 +287,6 @@ void swap(struct node *a, struct node *b)
     float temp_t = a->nota_trabalho; 
     a->nota_trabalho = b->nota_trabalho; 
     b->nota_trabalho = temp_t;
-
-    
-
 }  
 
 
@@ -414,8 +296,10 @@ void importar()
 {
    FILE * ficheiro_alunos_input;
 
-   ficheiro_alunos_input = fopen("BDalunosAED.dat","rb");  // !! deveria ser o "r"  !! <<<<<<<=====
-   
+   node_t * node_import;
+   node_import = (node_t *) malloc(sizeof (node_t));
+
+   ficheiro_alunos_input = fopen("BDalunosAED.dat","a+");  // !!  r ??
    if(!ficheiro_alunos_input)
    {  
       puts("erro ao abrir ficheiro");
@@ -425,22 +309,22 @@ void importar()
 
    while(!feof(ficheiro_alunos_input)) 
    {
-      current = (node_t *) malloc(sizeof (node_t));
-      fread(&current, sizeof(node_t),1,ficheiro_alunos_input);
+      fread(&node_import, sizeof(node_t),1,ficheiro_alunos_input);
       
       if (head == NULL)
       {
-         head = current;
+         head = node_import;
+         current = head;
          current->next = NULL;
       }
       else
       {
-          
-         current->next = current;
-         current->next->next = NULL;
+         //current->next = (node_t *) malloc(sizeof (node_t));
+         current->next = node_import;
+         node_import->next = NULL;
       }
       
-      current=current->next;  // ???
+      //current=current->next;
       
    }
 
@@ -465,7 +349,7 @@ void exportar()
       exit (1); 
    } 
 
-   // gravar a estrutura
+   // gravar a estrutura para i disco
    current = head;
    while (current->next != NULL)
    {
@@ -477,44 +361,3 @@ void exportar()
 
 }
 
-
-
-
-
-// FUNÇÃO INDICAR DADOS  ===================================================================================
-
-/*int indicar_dados()
-{
-   printf("Indique o Nome do Aluno: ");
-         scanf("%c",  &nome_a);
-         while (1)
-         {printf("Indique a nota da frequencia: ");
-         scanf("%f",  &nota_f);
-         if( nota_f<0 || nota_f> 20)
-            printf("valor invalido");
-         else 
-            break;
-         }
-         getchar();
-         while(1)
-         {
-         printf("Indique a nota do trabalho: ");
-         scanf("%f",  &nota_t);
-         if( nota_t<0 || nota_t> 20)
-            printf("valor invalido");
-         else 
-            break;
-         }
-         printf("Tem a certeza? (s/n): ");
-         getchar();
-         scanf("%c", &certeza);
-         if (certeza == 's')
-            registar( &head , nome_a, nota_f, nota_t );
-
-         else if (certeza == 'n')
-         {
-            printf("\n dados nao gravados \n");
-            avancar();
-            break;
-         }
-}*/
