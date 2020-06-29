@@ -209,12 +209,12 @@ void pesquisar (node_t *head , int num_aluno )
       current = current->next;
    }
 
-   printf ( "Num \t NOME \t\t Frequencia \t Trabalho \t Media \n");
+   printf ( "Num \tNOME \t\t\t\t  Frequencia \t Trabalho \tMedia \n");
 
    printf("%d \t", current->num_aluno);
-   printf("%s \t", current->nome_aluno);
-   printf("%.1f \t\t", current->nota_frequencia);
-   printf("%.1f \t\t", current->nota_trabalho);
+   printf("%-33s ", current->nome_aluno);
+   printf("%-14.1f ", current->nota_frequencia);
+   printf("%-14.1f ", current->nota_trabalho);
    printf("%.1f \n", (current->nota_frequencia + current->nota_trabalho)/2);
    current = current->next;
 }
