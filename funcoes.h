@@ -23,13 +23,6 @@ struct node *current = NULL;
 
 int num_selecionado;
 
-
-/*bool isEmpty () {
-    return head == NULL;
-    printf("lista vazia");
-    getchar();
-}*/
-
 // FUNÇÃO MENU ===========================================================================================
 int menu()
 {
@@ -78,7 +71,6 @@ int perguntar ()
 
 // FUNÇAO REGISTAR (1) ====================================================================================
 
- //void registar (node_t *head , int num_aluno, char nome_aluno[], float nota_frequencia, float nota_trabalho ) 
 
 void registar (int num_aluno, char nome_aluno[], float nota_frequencia, float nota_trabalho ) 
 {
@@ -113,7 +105,6 @@ void registar (int num_aluno, char nome_aluno[], float nota_frequencia, float no
 
 // FUNÇÃO EDITAR (2) =========================================================================================
 
-//void editar (node_t * head , int num_aluno)
 void editar (int num_aluno)
 {
    int num_a;
@@ -127,10 +118,6 @@ void editar (int num_aluno)
 
    while (current->num_aluno != num_aluno)
    {
-   /* if(current->next == NULL)
-         printf("registo não encontrado");
-         break; */
-
       current = current->next;
    }
 
@@ -202,10 +189,6 @@ void pesquisar (node_t *head , int num_aluno )
 
    while (current->num_aluno != num_aluno)
    {
-   /* if(current->next == NULL)
-         printf("registo não encontrado");
-         break; */
-
       current = current->next;
    }
 
@@ -244,8 +227,7 @@ void bubbleSort(struct node *head)
     int trocarped, i; 
     struct node *inicio; 
     struct node *final = NULL; 
-  
-    /* Checking for empty list */
+
     if (head == NULL) 
         return; 
   
@@ -323,8 +305,6 @@ void importar()
          current->next = node_import;
          node_import->next = NULL;
       }
-      
-      //current=current->next;
       
    }
 
